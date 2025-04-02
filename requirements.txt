@@ -5,3 +5,12 @@ beautifulsoup4
 loguru 
 newspaper3k 
 lxml-html-clean
+numpy==1.23.5
+pandas
+matplotlib
+scikit-learn
+seaborn
+tensorflow
+wordcloud
+transformers
+torch
