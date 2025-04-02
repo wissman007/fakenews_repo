@@ -62,6 +62,6 @@ run_this = print_context()
 with DAG(
     dag_id="my_dag_name",
     start_date=datetime.datetime(2021, 1, 1),
-    schedule="@daily",
+    schedule="None",
 ):
     EmptyOperator(task_id="task") >> run_this >> create_table
