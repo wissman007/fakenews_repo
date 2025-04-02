@@ -3,9 +3,9 @@ import tensorflow as tf
 from transformers import AutoTokenizer, TFAutoModelForSequenceClassification
 
 # Chargement du modèle et du tokenizer
-tokenizer = AutoTokenizer.from_pretrained('bert_data_prediction/tokenizer')
+tokenizer = AutoTokenizer.from_pretrained('dataprediction/tokenizer')
 max_len = 512
-loaded_model = TFAutoModelForSequenceClassification.from_pretrained('bert_data_prediction/model')
+loaded_model = TFAutoModelForSequenceClassification.from_pretrained('dataprediction/model')
 # Chargement du tokenizer
 def predict_text(text, threshold=0.5):
     """
