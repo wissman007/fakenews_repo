@@ -5,3 +5,7 @@ beautifulsoup4
 loguru 
 newspaper3k 
 lxml-html-clean
+numpy
+tensorflow
+pandas
+scikit-learn
