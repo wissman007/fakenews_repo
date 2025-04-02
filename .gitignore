@@ -1,3 +1,4 @@
 draftscrap.ipynb
 draft.ipynb
-*.python-version
+.python-version
+*.ipynb
