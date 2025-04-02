@@ -1,0 +1,30 @@
+[2025-04-02T08:07:53.576+0000] {local_task_job_runner.py:123} INFO - ::group::Pre task execution logs
+[2025-04-02T08:07:53.906+0000] {taskinstance.py:2614} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: my_dag_name.create_table scheduled__2022-11-14T00:00:00+00:00 [queued]>
+[2025-04-02T08:07:54.152+0000] {taskinstance.py:2614} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: my_dag_name.create_table scheduled__2022-11-14T00:00:00+00:00 [queued]>
+[2025-04-02T08:07:54.178+0000] {taskinstance.py:2867} INFO - Starting attempt 1 of 1
+[2025-04-02T08:07:54.461+0000] {taskinstance.py:2890} INFO - Executing <Task(BigQueryCreateTableOperator): create_table> on 2022-11-14 00:00:00+00:00
+[2025-04-02T08:07:54.583+0000] {warnings.py:112} WARNING - /home/***/.local/lib/python3.12/site-packages/***/task/task_runner/standard_task_runner.py:70: DeprecationWarning: This process (pid=6096) is multi-threaded, use of fork() may lead to deadlocks in the child.
+  pid = os.fork()
+
+[2025-04-02T08:07:54.606+0000] {standard_task_runner.py:72} INFO - Started process 6134 to run task
+[2025-04-02T08:07:54.620+0000] {standard_task_runner.py:104} INFO - Running: ['***', 'tasks', 'run', 'my_dag_name', 'create_table', 'scheduled__2022-11-14T00:00:00+00:00', '--job-id', '1371', '--raw', '--subdir', 'DAGS_FOLDER/con.py', '--cfg-path', '/tmp/tmpzjea81qi']
+[2025-04-02T08:07:54.639+0000] {standard_task_runner.py:105} INFO - Job 1371: Subtask create_table
+[2025-04-02T08:07:55.128+0000] {task_command.py:467} INFO - Running <TaskInstance: my_dag_name.create_table scheduled__2022-11-14T00:00:00+00:00 [running]> on host 900d630d7d5f
+[2025-04-02T08:07:56.277+0000] {taskinstance.py:3134} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='my_dag_name' AIRFLOW_CTX_TASK_ID='create_table' AIRFLOW_CTX_EXECUTION_DATE='2022-11-14T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2022-11-14T00:00:00+00:00'
+[2025-04-02T08:07:56.289+0000] {logging_mixin.py:190} INFO - Task instance is in running state
+[2025-04-02T08:07:56.292+0000] {logging_mixin.py:190} INFO -  Previous state of the Task instance: queued
+[2025-04-02T08:07:56.295+0000] {logging_mixin.py:190} INFO - Current task name:create_table state:running start_date:2025-04-02 08:07:53.908322+00:00
+[2025-04-02T08:07:56.296+0000] {logging_mixin.py:190} INFO - Dag name:my_dag_name and current dag run status:running
+[2025-04-02T08:07:56.301+0000] {taskinstance.py:732} INFO - ::endgroup::
+[2025-04-02T08:07:56.337+0000] {connection.py:277} WARNING - Connection schemes (type: google_cloud_platform) shall not contain '_' according to RFC3986.
+[2025-04-02T08:07:56.361+0000] {base.py:84} INFO - Retrieving connection 'gcp_co'
+[2025-04-02T08:07:56.362+0000] {bigquery.py:1274} INFO - Creating table...
+[2025-04-02T08:07:56.837+0000] {bigquery.py:1304} INFO - Table fake_news_detection.training_data already exists.
+[2025-04-02T08:07:57.057+0000] {taskinstance.py:341} INFO - ::group::Post task execution logs
+[2025-04-02T08:07:57.067+0000] {taskinstance.py:353} INFO - Marking task as SUCCESS. dag_id=my_dag_name, task_id=create_table, run_id=scheduled__2022-11-14T00:00:00+00:00, execution_date=20221114T000000, start_date=20250402T080753, end_date=20250402T080757
+[2025-04-02T08:07:57.407+0000] {logging_mixin.py:190} INFO - Task instance in success state
+[2025-04-02T08:07:57.408+0000] {logging_mixin.py:190} INFO -  Previous state of the Task instance: running
+[2025-04-02T08:07:57.409+0000] {logging_mixin.py:190} INFO - Dag name:my_dag_name queued_at:2025-04-02 08:06:52.250527+00:00
+[2025-04-02T08:07:57.409+0000] {logging_mixin.py:190} INFO - Task hostname:900d630d7d5f operator:BigQueryCreateTableOperator
+[2025-04-02T08:07:57.484+0000] {local_task_job_runner.py:266} INFO - Task exited with return code 0
+[2025-04-02T08:07:57.533+0000] {local_task_job_runner.py:245} INFO - ::endgroup::

@@ -1,0 +1,31 @@
+[2025-04-01T14:35:01.218+0000] {local_task_job_runner.py:123} INFO - ::group::Pre task execution logs
+[2025-04-01T14:35:01.672+0000] {taskinstance.py:2614} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: my_dag_name.create_table scheduled__2021-05-16T00:00:00+00:00 [queued]>
+[2025-04-01T14:35:01.804+0000] {taskinstance.py:2614} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: my_dag_name.create_table scheduled__2021-05-16T00:00:00+00:00 [queued]>
+[2025-04-01T14:35:01.805+0000] {taskinstance.py:2867} INFO - Starting attempt 1 of 1
+[2025-04-01T14:35:01.979+0000] {taskinstance.py:2890} INFO - Executing <Task(BigQueryCreateTableOperator): create_table> on 2021-05-16 00:00:00+00:00
+[2025-04-01T14:35:02.071+0000] {standard_task_runner.py:104} INFO - Running: ['***', 'tasks', 'run', 'my_dag_name', 'create_table', 'scheduled__2021-05-16T00:00:00+00:00', '--job-id', '287', '--raw', '--subdir', 'DAGS_FOLDER/con.py', '--cfg-path', '/tmp/tmpa0oml8e4']
+[2025-04-01T14:35:02.078+0000] {standard_task_runner.py:105} INFO - Job 287: Subtask create_table
+[2025-04-01T14:35:02.069+0000] {warnings.py:112} WARNING - /home/***/.local/lib/python3.12/site-packages/***/task/task_runner/standard_task_runner.py:70: DeprecationWarning: This process (pid=1318) is multi-threaded, use of fork() may lead to deadlocks in the child.
+  pid = os.fork()
+
+[2025-04-01T14:35:02.089+0000] {standard_task_runner.py:72} INFO - Started process 1370 to run task
+[2025-04-01T14:35:02.397+0000] {task_command.py:467} INFO - Running <TaskInstance: my_dag_name.create_table scheduled__2021-05-16T00:00:00+00:00 [running]> on host 900d630d7d5f
+[2025-04-01T14:35:03.271+0000] {taskinstance.py:3134} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='my_dag_name' AIRFLOW_CTX_TASK_ID='create_table' AIRFLOW_CTX_EXECUTION_DATE='2021-05-16T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2021-05-16T00:00:00+00:00'
+[2025-04-01T14:35:03.282+0000] {logging_mixin.py:190} INFO - Task instance is in running state
+[2025-04-01T14:35:03.283+0000] {logging_mixin.py:190} INFO -  Previous state of the Task instance: queued
+[2025-04-01T14:35:03.283+0000] {logging_mixin.py:190} INFO - Current task name:create_table state:running start_date:2025-04-01 14:35:01.673011+00:00
+[2025-04-01T14:35:03.293+0000] {logging_mixin.py:190} INFO - Dag name:my_dag_name and current dag run status:running
+[2025-04-01T14:35:03.294+0000] {taskinstance.py:732} INFO - ::endgroup::
+[2025-04-01T14:35:03.362+0000] {connection.py:277} WARNING - Connection schemes (type: google_cloud_platform) shall not contain '_' according to RFC3986.
+[2025-04-01T14:35:03.421+0000] {base.py:84} INFO - Retrieving connection 'gcp_co'
+[2025-04-01T14:35:03.429+0000] {bigquery.py:1274} INFO - Creating table...
+[2025-04-01T14:35:04.293+0000] {bigquery.py:1304} INFO - Table fake_news_detection.training_data already exists.
+[2025-04-01T14:35:04.428+0000] {taskinstance.py:341} INFO - ::group::Post task execution logs
+[2025-04-01T14:35:04.437+0000] {taskinstance.py:353} INFO - Marking task as SUCCESS. dag_id=my_dag_name, task_id=create_table, run_id=scheduled__2021-05-16T00:00:00+00:00, execution_date=20210516T000000, start_date=20250401T143501, end_date=20250401T143504
+[2025-04-01T14:35:04.588+0000] {logging_mixin.py:190} INFO - Task instance in success state
+[2025-04-01T14:35:04.589+0000] {logging_mixin.py:190} INFO -  Previous state of the Task instance: running
+[2025-04-01T14:35:04.589+0000] {logging_mixin.py:190} INFO - Dag name:my_dag_name queued_at:2025-04-01 14:33:54.287491+00:00
+[2025-04-01T14:35:04.590+0000] {logging_mixin.py:190} INFO - Task hostname:900d630d7d5f operator:BigQueryCreateTableOperator
+[2025-04-01T14:35:04.665+0000] {local_task_job_runner.py:266} INFO - Task exited with return code 0
+[2025-04-01T14:35:04.746+0000] {taskinstance.py:3901} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-04-01T14:35:04.754+0000] {local_task_job_runner.py:245} INFO - ::endgroup::
