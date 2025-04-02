@@ -9,4 +9,3 @@ numpy
 tensorflow
 pandas
 scikit-learn
-pandas
