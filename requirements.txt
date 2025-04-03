@@ -1,4 +1,19 @@
+<<<<<<< HEAD
 lxml-html-clean
+=======
+requests
+openai 
+scrapy 
+beautifulsoup4 
+loguru 
+newspaper3k 
+lxml-html-clean
+numpy
+tensorflow
+pandas
+scikit-learn
+wordcloud
+>>>>>>> 3fbcc0513e0bd95c8826e0b342f2e6c98f3f273c
 numpy==1.23
 tensorflow==2.10
 transformers
@@ -190,3 +205,6 @@ wrapt==1.17.2
 xxhash==3.5.0
 yarl==1.18.3
 zope.interface==7.2
+fastapi
+uvicorn
+pydantic
