@@ -1,0 +1,129 @@
+[2025-04-03T09:28:31.260+0000] {local_task_job_runner.py:123} INFO - ::group::Pre task execution logs
+[2025-04-03T09:28:31.294+0000] {taskinstance.py:2614} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: my_dag_name.insert_query_job manual__2025-04-03T09:28:03.510120+00:00 [queued]>
+[2025-04-03T09:28:31.313+0000] {taskinstance.py:2614} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: my_dag_name.insert_query_job manual__2025-04-03T09:28:03.510120+00:00 [queued]>
+[2025-04-03T09:28:31.314+0000] {taskinstance.py:2867} INFO - Starting attempt 1 of 1
+[2025-04-03T09:28:31.333+0000] {taskinstance.py:2890} INFO - Executing <Task(BigQueryInsertJobOperator): insert_query_job> on 2025-04-03 09:28:03.510120+00:00
+[2025-04-03T09:28:31.347+0000] {warnings.py:112} WARNING - /home/***/.local/lib/python3.12/site-packages/***/task/task_runner/standard_task_runner.py:70: DeprecationWarning: This process (pid=673) is multi-threaded, use of fork() may lead to deadlocks in the child.
+  pid = os.fork()
+
+[2025-04-03T09:28:31.349+0000] {standard_task_runner.py:72} INFO - Started process 675 to run task
+[2025-04-03T09:28:31.352+0000] {standard_task_runner.py:104} INFO - Running: ['***', 'tasks', 'run', 'my_dag_name', 'insert_query_job', 'manual__2025-04-03T09:28:03.510120+00:00', '--job-id', '39', '--raw', '--subdir', 'DAGS_FOLDER/intermediaire_table.py', '--cfg-path', '/tmp/tmpy1t0wc4f']
+[2025-04-03T09:28:31.354+0000] {standard_task_runner.py:105} INFO - Job 39: Subtask insert_query_job
+[2025-04-03T09:28:31.431+0000] {task_command.py:467} INFO - Running <TaskInstance: my_dag_name.insert_query_job manual__2025-04-03T09:28:03.510120+00:00 [running]> on host d6badcb20287
+[2025-04-03T09:28:31.617+0000] {taskinstance.py:3134} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='my_dag_name' AIRFLOW_CTX_TASK_ID='insert_query_job' AIRFLOW_CTX_EXECUTION_DATE='2025-04-03T09:28:03.510120+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-04-03T09:28:03.510120+00:00'
+[2025-04-03T09:28:31.621+0000] {logging_mixin.py:190} INFO - Task instance is in running state
+[2025-04-03T09:28:31.621+0000] {logging_mixin.py:190} INFO -  Previous state of the Task instance: queued
+[2025-04-03T09:28:31.622+0000] {logging_mixin.py:190} INFO - Current task name:insert_query_job state:running start_date:2025-04-03 09:28:31.295294+00:00
+[2025-04-03T09:28:31.622+0000] {logging_mixin.py:190} INFO - Dag name:my_dag_name and current dag run status:running
+[2025-04-03T09:28:31.623+0000] {taskinstance.py:732} INFO - ::endgroup::
+[2025-04-03T09:28:31.649+0000] {base.py:84} INFO - Retrieving connection 'gcp_conn'
+[2025-04-03T09:28:31.748+0000] {bigquery.py:2958} INFO - Executing: {'query': {'query': '\n    f"DELETE FROM `nlpfakenews.fake_news_detection.training_data`"\n    f"WHERE id_news IN [\'1jqdoke\', \'1jqdjsw\', \'1jqdj5f\', \'1jqdido\', \'1jqdhq9\', \'1jqdg5s\', \'1jqdat4\', \'1jqdaa6\', \'1jqd7f3\', \'1jqd67f\', \'1jqd1wp\', \'1jqcyyp\', \'1jqcyan\', \'1jqcxr8\', \'1jqcqxt\', \'1jqc9ax\', \'1jqbxdb\', \'1jqbprr\', \'1jqbfnd\', \'1jqbfe9\', \'1jqbahu\', \'1jqb6td\', \'1jqb5c7\', \'1jqb543\', \'1jqb42b\']"\n    ', 'useLegacySql': False, 'priority': 'BATCH'}}'
+[2025-04-03T09:28:31.750+0000] {bigquery.py:1343} INFO - Inserting job ***_my_dag_name_insert_query_job_2025_04_03T09_28_03_510120_00_00_40dabe41fb9a52584413ea4dba177b69
+[2025-04-03T09:28:32.328+0000] {taskinstance.py:3313} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 768, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 734, in _execute_callable
+    return ExecutionCallableRunner(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/operator_helpers.py", line 252, in run
+    return self.func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 424, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/providers/google/cloud/operators/bigquery.py", line 3035, in execute
+    job.result(timeout=self.result_timeout, retry=self.result_retry)
+  File "/home/airflow/.local/lib/python3.12/site-packages/google/cloud/bigquery/job/query.py", line 1590, in result
+    do_get_result()
+  File "/home/airflow/.local/lib/python3.12/site-packages/google/cloud/bigquery/job/query.py", line 1579, in do_get_result
+    super(QueryJob, self).result(retry=retry, timeout=timeout)
+  File "/home/airflow/.local/lib/python3.12/site-packages/google/cloud/bigquery/job/base.py", line 971, in result
+    return super(_AsyncJob, self).result(timeout=timeout, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/google/api_core/future/polling.py", line 261, in result
+    raise self._exception
+google.api_core.exceptions.BadRequest: 400 Syntax error: Unexpected identifier "f" at [2:5]; reason: invalidQuery, location: query, message: Syntax error: Unexpected identifier "f" at [2:5]
+
+Location: US
+Job ID: airflow_my_dag_name_insert_query_job_2025_04_03T09_28_03_510120_00_00_40dabe41fb9a52584413ea4dba177b69
+
+[2025-04-03T09:28:32.350+0000] {logging_mixin.py:190} INFO - Task instance in failure state
+[2025-04-03T09:28:32.351+0000] {logging_mixin.py:190} INFO - Task start:2025-04-03 09:28:31.295294+00:00 end:2025-04-03 09:28:32.349770+00:00 duration:1.054476
+[2025-04-03T09:28:32.352+0000] {logging_mixin.py:190} INFO - Task:<Task(BigQueryInsertJobOperator): insert_query_job> dag:<DAG: my_dag_name> dagrun:<DagRun my_dag_name @ 2025-04-03 09:28:03.510120+00:00: manual__2025-04-03T09:28:03.510120+00:00, state:running, queued_at: 2025-04-03 09:28:03.559544+00:00. externally triggered: True>
+[2025-04-03T09:28:32.352+0000] {logging_mixin.py:190} INFO - Failure caused by 400 Syntax error: Unexpected identifier "f" at [2:5]; reason: invalidQuery, location: query, message: Syntax error: Unexpected identifier "f" at [2:5]
+
+Location: US
+Job ID: ***_my_dag_name_insert_query_job_2025_04_03T09_28_03_510120_00_00_40dabe41fb9a52584413ea4dba177b69
+[2025-04-03T09:28:32.353+0000] {taskinstance.py:1226} INFO - Marking task as FAILED. dag_id=my_dag_name, task_id=insert_query_job, run_id=manual__2025-04-03T09:28:03.510120+00:00, execution_date=20250403T092803, start_date=20250403T092831, end_date=20250403T092832
+[2025-04-03T09:28:32.414+0000] {taskinstance.py:341} INFO - ::group::Post task execution logs
+[2025-04-03T09:28:32.415+0000] {standard_task_runner.py:124} ERROR - Failed to execute job 39 for task insert_query_job (400 Syntax error: Unexpected identifier "f" at [2:5]; reason: invalidQuery, location: query, message: Syntax error: Unexpected identifier "f" at [2:5]
+
+Location: US
+Job ID: airflow_my_dag_name_insert_query_job_2025_04_03T09_28_03_510120_00_00_40dabe41fb9a52584413ea4dba177b69
+; 675)
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/task/task_runner/standard_task_runner.py", line 117, in _start_by_fork
+    ret = args.func(args, dag=self.dag)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/cli/cli_config.py", line 49, in command
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/cli.py", line 116, in wrapper
+    return f(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/cli/commands/task_command.py", line 483, in task_run
+    task_return_code = _run_task_by_selected_method(args, _dag, ti)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/cli/commands/task_command.py", line 256, in _run_task_by_selected_method
+    return _run_raw_task(args, ti)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/cli/commands/task_command.py", line 341, in _run_raw_task
+    return ti._run_raw_task(
+           ^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/session.py", line 97, in wrapper
+    return func(*args, session=session, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 3006, in _run_raw_task
+    return _run_raw_task(
+           ^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 274, in _run_raw_task
+    TaskInstance._execute_task_with_callbacks(
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 3161, in _execute_task_with_callbacks
+    result = self._execute_task(context, task_orig)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 3185, in _execute_task
+    return _execute_task(self, context, task_orig)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 768, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 734, in _execute_callable
+    return ExecutionCallableRunner(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/utils/operator_helpers.py", line 252, in run
+    return self.func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 424, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/providers/google/cloud/operators/bigquery.py", line 3035, in execute
+    job.result(timeout=self.result_timeout, retry=self.result_retry)
+  File "/home/airflow/.local/lib/python3.12/site-packages/google/cloud/bigquery/job/query.py", line 1590, in result
+    do_get_result()
+  File "/home/airflow/.local/lib/python3.12/site-packages/google/cloud/bigquery/job/query.py", line 1579, in do_get_result
+    super(QueryJob, self).result(retry=retry, timeout=timeout)
+  File "/home/airflow/.local/lib/python3.12/site-packages/google/cloud/bigquery/job/base.py", line 971, in result
+    return super(_AsyncJob, self).result(timeout=timeout, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/google/api_core/future/polling.py", line 261, in result
+    raise self._exception
+google.api_core.exceptions.BadRequest: 400 Syntax error: Unexpected identifier "f" at [2:5]; reason: invalidQuery, location: query, message: Syntax error: Unexpected identifier "f" at [2:5]
+
+Location: US
+Job ID: airflow_my_dag_name_insert_query_job_2025_04_03T09_28_03_510120_00_00_40dabe41fb9a52584413ea4dba177b69
+
+[2025-04-03T09:28:32.455+0000] {local_task_job_runner.py:266} INFO - Task exited with return code 1
+[2025-04-03T09:28:32.491+0000] {taskinstance.py:3901} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-04-03T09:28:32.494+0000] {local_task_job_runner.py:245} INFO - ::endgroup::
