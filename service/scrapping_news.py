@@ -1,7 +1,7 @@
 import requests
 from newspaper import Article
 from loguru import logger
-
+import pandas as pd
 
 def extract_newspaper_attempt(url:str)-> dict:
     """
@@ -13,14 +13,18 @@ def extract_newspaper_attempt(url:str)-> dict:
         dict: A dictionary with the title and content of the article
     """
     try:
+        print("URl")
+        print(url)
         article = Article(url)
         article.download()
         article.parse()
         logger.info('Article parsed. ✅')
-        return {"Title":article.title,"Content":cleaning_text(article.text)}
+        return pd.Series([article.title, cleaning_text(article.text)])
     except: 
+        logger.error(f"URL : {url}")
         logger.error('Cannot extract information with newspaper. ❌')
-        raise NotImplementedError
+        return pd.Series(['None', 'None'])
+
     
 def cleaning_text(text:str)-> str:
     """
@@ -34,7 +38,16 @@ def cleaning_text(text:str)-> str:
     words_to_delete = ['Advertisement', 'Ad', 'Advertisement by']
     for word in words_to_delete:
         cleaned_text = text.replace(word, "")
-
     cleaned_text = " ".join(text.split())
 
     return cleaned_text
+
+#df_test = pd.DataFrame({
+#    "id_news": "test1",
+#    "title": "hello decla",
+#    "url": ["https://www.declassifieduk.org/how-israel-secretly-armed-argentina-during-the-falklands-war/"]*2,
+#    "author": "gauthier",
+#    "source": "reddit"
+#})
+#df_test[['official_title', 'real_content']] = df_test['url'].apply(extract_newspaper_attempt)
+
