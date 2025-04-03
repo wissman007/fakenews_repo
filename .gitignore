@@ -2,3 +2,6 @@ draftscrap.ipynb
 .python-version
 *.ipynb
 .env
+
+# Python environment
+.python-version
