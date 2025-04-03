@@ -1,0 +1,24 @@
+# Web
+requests
+scrapy 
+beautifulsoup4 
+newspaper3k 
+lxml-html-clean
+wget
+# Machine Learning
+numpy
+pandas
+tensorflow==2.10.0
+scikit-learn
+tensorflow
+transformers
+torch
+openai 
+evaluate
+
+# Data Viz
+wordcloud
+seaborn
+
+# Dev
+loguru 

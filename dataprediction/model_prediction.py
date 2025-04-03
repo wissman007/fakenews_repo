@@ -3,9 +3,9 @@ import tensorflow as tf
 from transformers import AutoTokenizer, TFAutoModelForSequenceClassification
 
 # Chargement du modèle et du tokenizer
-tokenizer = AutoTokenizer.from_pretrained('dataprediction/tokenizer')
+tokenizer = AutoTokenizer.from_pretrained('./tokenizer')
 max_len = 512
-loaded_model = TFAutoModelForSequenceClassification.from_pretrained('dataprediction/model')
+loaded_model=tf.keras.models.load_model('model')
 # Chargement du tokenizer
 def predict_text(text, threshold=0.5):
     """
@@ -41,9 +41,11 @@ if __name__ == "__main__":
     "Since returning to the White House, Trump has enacted a series of executive orders rolling back rights for transgender and nonbinary individuals. On his first day back in office, he signed an order declaring that the government would recognize only two genders: male and female."
     
     # Appel de la fonction de prédiction
-    result = predict_text(sample_text)
+    #result = predict_text(sample_text)
 
     # Affichage des résultats
-    print(f"Texte: {sample_text}")
-    print(f"Score: {result['score']}")
-    print(f"Prédiction: {result['prediction']}")
+    print(loaded_model.summary())
+    print(tokenizer)
+    #print(f"Texte: {sample_text}")
+    #print(f"Score: {result['score']}")
+    #print(f"Prédiction: {result['prediction']}")
