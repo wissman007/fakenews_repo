@@ -1,0 +1,162 @@
+[2025-04-03T10:14:34.834+0000] {local_task_job_runner.py:123} INFO - ::group::Pre task execution logs
+[2025-04-03T10:14:34.869+0000] {taskinstance.py:2614} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: my_dag_name.call_external_function manual__2025-04-03T10:14:31.221732+00:00 [queued]>
+[2025-04-03T10:14:34.887+0000] {taskinstance.py:2614} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: my_dag_name.call_external_function manual__2025-04-03T10:14:31.221732+00:00 [queued]>
+[2025-04-03T10:14:34.888+0000] {taskinstance.py:2867} INFO - Starting attempt 1 of 1
+[2025-04-03T10:14:34.920+0000] {taskinstance.py:2890} INFO - Executing <Task(PythonOperator): call_external_function> on 2025-04-03 10:14:31.221732+00:00
+[2025-04-03T10:14:34.937+0000] {warnings.py:112} WARNING - /home/***/.local/lib/python3.12/site-packages/***/task/task_runner/standard_task_runner.py:70: DeprecationWarning: This process (pid=1384) is multi-threaded, use of fork() may lead to deadlocks in the child.
+  pid = os.fork()
+
+[2025-04-03T10:14:34.940+0000] {standard_task_runner.py:72} INFO - Started process 1386 to run task
+[2025-04-03T10:14:34.944+0000] {standard_task_runner.py:104} INFO - Running: ['***', 'tasks', 'run', 'my_dag_name', 'call_external_function', 'manual__2025-04-03T10:14:31.221732+00:00', '--job-id', '74', '--raw', '--subdir', 'DAGS_FOLDER/intermediaire_table.py', '--cfg-path', '/tmp/tmpqaqxbhsi']
+[2025-04-03T10:14:34.947+0000] {standard_task_runner.py:105} INFO - Job 74: Subtask call_external_function
+[2025-04-03T10:14:35.039+0000] {task_command.py:467} INFO - Running <TaskInstance: my_dag_name.call_external_function manual__2025-04-03T10:14:31.221732+00:00 [running]> on host d6badcb20287
+[2025-04-03T10:14:35.192+0000] {taskinstance.py:3134} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='my_dag_name' AIRFLOW_CTX_TASK_ID='call_external_function' AIRFLOW_CTX_EXECUTION_DATE='2025-04-03T10:14:31.221732+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-04-03T10:14:31.221732+00:00'
+[2025-04-03T10:14:35.195+0000] {logging_mixin.py:190} INFO - Task instance is in running state
+[2025-04-03T10:14:35.196+0000] {logging_mixin.py:190} INFO -  Previous state of the Task instance: queued
+[2025-04-03T10:14:35.196+0000] {logging_mixin.py:190} INFO - Current task name:call_external_function state:running start_date:2025-04-03 10:14:34.870527+00:00
+[2025-04-03T10:14:35.197+0000] {logging_mixin.py:190} INFO - Dag name:my_dag_name and current dag run status:running
+[2025-04-03T10:14:35.197+0000] {taskinstance.py:732} INFO - ::endgroup::
+[2025-04-03T10:14:35.686+0000] {logging_mixin.py:190} INFO - URl
+[2025-04-03T10:14:35.687+0000] {logging_mixin.py:190} INFO - https://www.politico.eu/article/hungary-quit-icc-internatinal-criminal-court-israel-benjamin-netanyahu-visit/
+[2025-04-03T10:14:35.950+0000] {log.py:232} WARNING - 2025-04-03 10:14:35.950 | INFO     | scripts.scrapping_news:extract_newspaper_attempt:21 - Article parsed. ✅
+[2025-04-03T10:14:35.952+0000] {logging_mixin.py:190} INFO - URl
+[2025-04-03T10:14:35.953+0000] {logging_mixin.py:190} INFO - https://eletric-vehicles.com/ford/auto-stocks-fall-on-us-tariffs-china-urges-immediate-rollback/
+[2025-04-03T10:14:36.249+0000] {log.py:232} WARNING - 2025-04-03 10:14:36.249 | INFO     | scripts.scrapping_news:extract_newspaper_attempt:21 - Article parsed. ✅
+[2025-04-03T10:14:36.251+0000] {logging_mixin.py:190} INFO - URl
+[2025-04-03T10:14:36.253+0000] {logging_mixin.py:190} INFO - https://www.aa.com.tr/en/americas/germany-slams-trump-tariffs-as-attack-on-international-trade-order/3527096
+[2025-04-03T10:14:43.901+0000] {log.py:232} WARNING - 2025-04-03 10:14:43.900 | ERROR    | scripts.scrapping_news:extract_newspaper_attempt:24 - URL : https://www.aa.com.tr/en/americas/germany-slams-trump-tariffs-as-attack-on-international-trade-order/3527096
+[2025-04-03T10:14:43.902+0000] {log.py:232} WARNING - 2025-04-03 10:14:43.901 | ERROR    | scripts.scrapping_news:extract_newspaper_attempt:25 - Cannot extract information with newspaper. ❌
+[2025-04-03T10:14:43.903+0000] {logging_mixin.py:190} INFO - URl
+[2025-04-03T10:14:43.903+0000] {logging_mixin.py:190} INFO - https://www.pravda.com.ua/eng/news/2025/04/3/7505802/
+[2025-04-03T10:14:44.127+0000] {log.py:232} WARNING - 2025-04-03 10:14:44.127 | INFO     | scripts.scrapping_news:extract_newspaper_attempt:21 - Article parsed. ✅
+[2025-04-03T10:14:44.129+0000] {logging_mixin.py:190} INFO - URl
+[2025-04-03T10:14:44.129+0000] {logging_mixin.py:190} INFO - https://efe.com/en/latest-news/2025-04-02/milei-assures-that-falkland-islanders-will-prefer-being-argentine/
+[2025-04-03T10:14:44.279+0000] {log.py:232} WARNING - 2025-04-03 10:14:44.279 | INFO     | scripts.scrapping_news:extract_newspaper_attempt:21 - Article parsed. ✅
+[2025-04-03T10:14:44.281+0000] {logging_mixin.py:190} INFO - URl
+[2025-04-03T10:14:44.282+0000] {logging_mixin.py:190} INFO - https://www.rnz.co.nz/international/pacific-news/557082/fiji-have-been-slapped-with-the-highest-us-tariffs-in-the-pacific
+[2025-04-03T10:14:44.637+0000] {log.py:232} WARNING - 2025-04-03 10:14:44.637 | INFO     | scripts.scrapping_news:extract_newspaper_attempt:21 - Article parsed. ✅
+[2025-04-03T10:14:44.638+0000] {logging_mixin.py:190} INFO - URl
+[2025-04-03T10:14:44.639+0000] {logging_mixin.py:190} INFO - https://www.abc.net.au/news/2025-04-03/hungary-withdraws-from-icc-as-netanyahu-visits/105135524
+[2025-04-03T10:14:44.678+0000] {log.py:232} WARNING - 2025-04-03 10:14:44.678 | ERROR    | scripts.scrapping_news:extract_newspaper_attempt:24 - URL : https://www.abc.net.au/news/2025-04-03/hungary-withdraws-from-icc-as-netanyahu-visits/105135524
+[2025-04-03T10:14:44.679+0000] {log.py:232} WARNING - 2025-04-03 10:14:44.679 | ERROR    | scripts.scrapping_news:extract_newspaper_attempt:25 - Cannot extract information with newspaper. ❌
+[2025-04-03T10:14:44.680+0000] {logging_mixin.py:190} INFO - URl
+[2025-04-03T10:14:44.680+0000] {logging_mixin.py:190} INFO - https://kyivindependent.com/ukraine-to-receive-432-million-from-world-bank-towards-transport-infrastructure-restoration/
+[2025-04-03T10:14:44.954+0000] {log.py:232} WARNING - 2025-04-03 10:14:44.954 | INFO     | scripts.scrapping_news:extract_newspaper_attempt:21 - Article parsed. ✅
+[2025-04-03T10:14:44.956+0000] {logging_mixin.py:190} INFO - URl
+[2025-04-03T10:14:44.957+0000] {logging_mixin.py:190} INFO - https://m.economictimes.com/news/india/american-man-arrested-for-illegally-entering-andamans-north-sentinel-island-one-of-the-worlds-most-restricted-areas/articleshow/119930367.cms
+[2025-04-03T10:14:45.289+0000] {log.py:232} WARNING - 2025-04-03 10:14:45.289 | INFO     | scripts.scrapping_news:extract_newspaper_attempt:21 - Article parsed. ✅
+[2025-04-03T10:14:45.292+0000] {logging_mixin.py:190} INFO - URl
+[2025-04-03T10:14:45.293+0000] {logging_mixin.py:190} INFO - https://militarnyi.com/en/news/us-concerned-about-europe-s-desire-to-buy-less-american-weapons/
+[2025-04-03T10:14:45.996+0000] {log.py:232} WARNING - 2025-04-03 10:14:45.996 | INFO     | scripts.scrapping_news:extract_newspaper_attempt:21 - Article parsed. ✅
+[2025-04-03T10:14:45.998+0000] {logging_mixin.py:190} INFO - URl
+[2025-04-03T10:14:45.999+0000] {logging_mixin.py:190} INFO - https://n1info.rs/english/news/serbian-students-depart-for-strasbourg-by-bicycle-europe-has-been-asleep-for-too-long/
+[2025-04-03T10:14:46.223+0000] {log.py:232} WARNING - 2025-04-03 10:14:46.223 | INFO     | scripts.scrapping_news:extract_newspaper_attempt:21 - Article parsed. ✅
+[2025-04-03T10:14:46.224+0000] {logging_mixin.py:190} INFO - URl
+[2025-04-03T10:14:46.225+0000] {logging_mixin.py:190} INFO - https://www.reuters.com/world/hungary-says-it-is-withdrawing-icc-israeli-leader-visits-2025-04-03/
+[2025-04-03T10:14:46.305+0000] {log.py:232} WARNING - 2025-04-03 10:14:46.305 | ERROR    | scripts.scrapping_news:extract_newspaper_attempt:24 - URL : https://www.reuters.com/world/hungary-says-it-is-withdrawing-icc-israeli-leader-visits-2025-04-03/
+[2025-04-03T10:14:46.306+0000] {log.py:232} WARNING - 2025-04-03 10:14:46.306 | ERROR    | scripts.scrapping_news:extract_newspaper_attempt:25 - Cannot extract information with newspaper. ❌
+[2025-04-03T10:14:46.307+0000] {logging_mixin.py:190} INFO - URl
+[2025-04-03T10:14:46.308+0000] {logging_mixin.py:190} INFO - https://www.cnn.com/2025/04/03/world/hungary-withdraws-icc-intl
+[2025-04-03T10:14:46.745+0000] {log.py:232} WARNING - 2025-04-03 10:14:46.745 | INFO     | scripts.scrapping_news:extract_newspaper_attempt:21 - Article parsed. ✅
+[2025-04-03T10:14:46.750+0000] {logging_mixin.py:190} INFO - URl
+[2025-04-03T10:14:46.751+0000] {logging_mixin.py:190} INFO - https://apnews.com/article/hungary-criminal-court-withdrawal-israel-5263edb40318816508e6b998befc6ee5
+[2025-04-03T10:14:47.494+0000] {log.py:232} WARNING - 2025-04-03 10:14:47.494 | INFO     | scripts.scrapping_news:extract_newspaper_attempt:21 - Article parsed. ✅
+[2025-04-03T10:14:47.496+0000] {logging_mixin.py:190} INFO - URl
+[2025-04-03T10:14:47.498+0000] {logging_mixin.py:190} INFO - https://www.bbc.com/news/articles/c807lm2003zo
+[2025-04-03T10:14:47.708+0000] {log.py:232} WARNING - 2025-04-03 10:14:47.708 | INFO     | scripts.scrapping_news:extract_newspaper_attempt:21 - Article parsed. ✅
+[2025-04-03T10:14:47.710+0000] {logging_mixin.py:190} INFO - URl
+[2025-04-03T10:14:47.711+0000] {logging_mixin.py:190} INFO - https://global.espreso.tv/russia-ukraine-war-white-house-explains-why-new-tariffs-do-not-apply-to-russia-and-north-korea
+[2025-04-03T10:14:47.967+0000] {log.py:232} WARNING - 2025-04-03 10:14:47.967 | INFO     | scripts.scrapping_news:extract_newspaper_attempt:21 - Article parsed. ✅
+[2025-04-03T10:14:47.969+0000] {logging_mixin.py:190} INFO - URl
+[2025-04-03T10:14:47.970+0000] {logging_mixin.py:190} INFO - https://global.espreso.tv/grain-deal-us-imposes-new-sanctions-on-individuals-tied-to-theft-of-ukrainian-grain-from-occupied-territories
+[2025-04-03T10:14:48.476+0000] {log.py:232} WARNING - 2025-04-03 10:14:48.476 | INFO     | scripts.scrapping_news:extract_newspaper_attempt:21 - Article parsed. ✅
+[2025-04-03T10:14:48.478+0000] {logging_mixin.py:190} INFO - URl
+[2025-04-03T10:14:48.479+0000] {logging_mixin.py:190} INFO - https://www.usnews.com/news/world/articles/2025-04-03/eus-kallas-eu-countries-already-providing-over-50-ukraines-ammunition-needs
+[2025-04-03T10:14:48.688+0000] {log.py:232} WARNING - 2025-04-03 10:14:48.688 | INFO     | scripts.scrapping_news:extract_newspaper_attempt:21 - Article parsed. ✅
+[2025-04-03T10:14:48.690+0000] {logging_mixin.py:190} INFO - URl
+[2025-04-03T10:14:48.691+0000] {logging_mixin.py:190} INFO - https://www.nbcnews.com/news/world/eu-preparing-countermeasures-us-tariffs-negotiations-fail-ec-president-rcna199427
+[2025-04-03T10:14:48.927+0000] {log.py:232} WARNING - 2025-04-03 10:14:48.927 | INFO     | scripts.scrapping_news:extract_newspaper_attempt:21 - Article parsed. ✅
+[2025-04-03T10:14:48.929+0000] {logging_mixin.py:190} INFO - URl
+[2025-04-03T10:14:48.930+0000] {logging_mixin.py:190} INFO - https://global.espreso.tv/us-senate-introduces-bill-proposing-500-tariff-on-countries-buying-russian-oil
+[2025-04-03T10:14:49.402+0000] {log.py:232} WARNING - 2025-04-03 10:14:49.402 | INFO     | scripts.scrapping_news:extract_newspaper_attempt:21 - Article parsed. ✅
+[2025-04-03T10:14:49.404+0000] {logging_mixin.py:190} INFO - URl
+[2025-04-03T10:14:49.405+0000] {logging_mixin.py:190} INFO - https://www.cnn.com/2025/04/03/business/europe-tariffs-us-von-der-leyen-intl-hnk/index.html
+[2025-04-03T10:14:50.012+0000] {log.py:232} WARNING - 2025-04-03 10:14:50.011 | INFO     | scripts.scrapping_news:extract_newspaper_attempt:21 - Article parsed. ✅
+[2025-04-03T10:14:50.018+0000] {logging_mixin.py:190} INFO - URl
+[2025-04-03T10:14:50.020+0000] {logging_mixin.py:190} INFO - https://www.ndtv.com/india-news/us-man-arrested-for-entering-restricted-north-sentinel-island-in-andamans-cops-8071854
+[2025-04-03T10:14:50.607+0000] {log.py:232} WARNING - 2025-04-03 10:14:50.607 | INFO     | scripts.scrapping_news:extract_newspaper_attempt:21 - Article parsed. ✅
+[2025-04-03T10:14:50.610+0000] {logging_mixin.py:190} INFO - URl
+[2025-04-03T10:14:50.612+0000] {logging_mixin.py:190} INFO - https://kyivindependent.com/russia-missing-from-trumps-sweeping-tariffs-list-as-its-already-sanctioned-white-house-confirms/
+[2025-04-03T10:14:50.883+0000] {log.py:232} WARNING - 2025-04-03 10:14:50.882 | INFO     | scripts.scrapping_news:extract_newspaper_attempt:21 - Article parsed. ✅
+[2025-04-03T10:14:50.885+0000] {logging_mixin.py:190} INFO - URl
+[2025-04-03T10:14:50.886+0000] {logging_mixin.py:190} INFO - https://www.telegraph.co.uk/world-news/2025/04/03/putin-russia-muslim-immigration-war-ukraine-europe/
+[2025-04-03T10:14:51.310+0000] {log.py:232} WARNING - 2025-04-03 10:14:51.310 | INFO     | scripts.scrapping_news:extract_newspaper_attempt:21 - Article parsed. ✅
+[2025-04-03T10:14:51.312+0000] {logging_mixin.py:190} INFO - URl
+[2025-04-03T10:14:51.314+0000] {logging_mixin.py:190} INFO - https://indianexpress.com/article/technology/science/amazon-targets-april-9-launch-of-first-kuiper-internet-satellites-9921445/
+[2025-04-03T10:14:51.566+0000] {log.py:232} WARNING - 2025-04-03 10:14:51.566 | INFO     | scripts.scrapping_news:extract_newspaper_attempt:21 - Article parsed. ✅
+[2025-04-03T10:14:51.575+0000] {logging_mixin.py:190} INFO - ['1jqeiiz', '1jqe6i5', '1jqe52q', '1jqe4eu', '1jqdjsw', '1jqdj5f', '1jqdido', '1jqdhq9', '1jqdg5s', '1jqdat4', '1jqdaa6', '1jqd7f3', '1jqd1wp', '1jqcyyp', '1jqcyan', '1jqcxr8', '1jqcqxt', '1jqc9ax', '1jqbxdb', '1jqbprr', '1jqbfnd', '1jqbfe9', '1jqbahu', '1jqb6td', '1jqb5c7']
+[2025-04-03T10:14:51.596+0000] {logging_mixin.py:190} INFO -     id_news  ... scrapping_status
+0   1jqeiiz  ...             True
+1   1jqe6i5  ...             True
+2   1jqe52q  ...            False
+3   1jqe4eu  ...             True
+4   1jqdjsw  ...             True
+5   1jqdj5f  ...             True
+6   1jqdido  ...            False
+7   1jqdhq9  ...             True
+8   1jqdg5s  ...             True
+9   1jqdat4  ...             True
+10  1jqdaa6  ...             True
+11  1jqd7f3  ...            False
+12  1jqd1wp  ...             True
+13  1jqcyyp  ...             True
+14  1jqcyan  ...             True
+15  1jqcxr8  ...             True
+16  1jqcqxt  ...             True
+17  1jqc9ax  ...             True
+18  1jqbxdb  ...             True
+19  1jqbprr  ...             True
+20  1jqbfnd  ...             True
+21  1jqbfe9  ...             True
+22  1jqbahu  ...             True
+23  1jqb6td  ...             True
+24  1jqb5c7  ...             True
+
+[25 rows x 8 columns]
+[2025-04-03T10:14:51.597+0000] {python.py:240} INFO - Done. Returned value was: (    id_news  ... scrapping_status
+0   1jqeiiz  ...             True
+1   1jqe6i5  ...             True
+2   1jqe52q  ...            False
+3   1jqe4eu  ...             True
+4   1jqdjsw  ...             True
+5   1jqdj5f  ...             True
+6   1jqdido  ...            False
+7   1jqdhq9  ...             True
+8   1jqdg5s  ...             True
+9   1jqdat4  ...             True
+10  1jqdaa6  ...             True
+11  1jqd7f3  ...            False
+12  1jqd1wp  ...             True
+13  1jqcyyp  ...             True
+14  1jqcyan  ...             True
+15  1jqcxr8  ...             True
+16  1jqcqxt  ...             True
+17  1jqc9ax  ...             True
+18  1jqbxdb  ...             True
+19  1jqbprr  ...             True
+20  1jqbfnd  ...             True
+21  1jqbfe9  ...             True
+22  1jqbahu  ...             True
+23  1jqb6td  ...             True
+24  1jqb5c7  ...             True
+
+[25 rows x 8 columns], ['1jqeiiz', '1jqe6i5', '1jqe52q', '1jqe4eu', '1jqdjsw', '1jqdj5f', '1jqdido', '1jqdhq9', '1jqdg5s', '1jqdat4', '1jqdaa6', '1jqd7f3', '1jqd1wp', '1jqcyyp', '1jqcyan', '1jqcxr8', '1jqcqxt', '1jqc9ax', '1jqbxdb', '1jqbprr', '1jqbfnd', '1jqbfe9', '1jqbahu', '1jqb6td', '1jqb5c7'])
+[2025-04-03T10:14:51.707+0000] {taskinstance.py:341} INFO - ::group::Post task execution logs
+[2025-04-03T10:14:51.708+0000] {taskinstance.py:353} INFO - Marking task as SUCCESS. dag_id=my_dag_name, task_id=call_external_function, run_id=manual__2025-04-03T10:14:31.221732+00:00, execution_date=20250403T101431, start_date=20250403T101434, end_date=20250403T101451
+[2025-04-03T10:14:51.743+0000] {logging_mixin.py:190} INFO - Task instance in success state
+[2025-04-03T10:14:51.744+0000] {logging_mixin.py:190} INFO -  Previous state of the Task instance: running
+[2025-04-03T10:14:51.744+0000] {logging_mixin.py:190} INFO - Dag name:my_dag_name queued_at:2025-04-03 10:14:31.237779+00:00
+[2025-04-03T10:14:51.744+0000] {logging_mixin.py:190} INFO - Task hostname:d6badcb20287 operator:PythonOperator
+[2025-04-03T10:14:51.764+0000] {local_task_job_runner.py:266} INFO - Task exited with return code 0
+[2025-04-03T10:14:51.801+0000] {taskinstance.py:3901} INFO - 1 downstream tasks scheduled from follow-on schedule check
+[2025-04-03T10:14:51.803+0000] {local_task_job_runner.py:245} INFO - ::endgroup::

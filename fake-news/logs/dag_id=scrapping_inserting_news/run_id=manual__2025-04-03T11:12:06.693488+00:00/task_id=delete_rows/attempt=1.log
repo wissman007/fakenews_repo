@@ -1,0 +1,31 @@
+[2025-04-03T11:12:50.174+0000] {local_task_job_runner.py:123} INFO - ::group::Pre task execution logs
+[2025-04-03T11:12:50.229+0000] {taskinstance.py:2614} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: scrapping_inserting_news.delete_rows manual__2025-04-03T11:12:06.693488+00:00 [queued]>
+[2025-04-03T11:12:50.252+0000] {taskinstance.py:2614} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: scrapping_inserting_news.delete_rows manual__2025-04-03T11:12:06.693488+00:00 [queued]>
+[2025-04-03T11:12:50.253+0000] {taskinstance.py:2867} INFO - Starting attempt 1 of 1
+[2025-04-03T11:12:50.282+0000] {taskinstance.py:2890} INFO - Executing <Task(BigQueryInsertJobOperator): delete_rows> on 2025-04-03 11:12:06.693488+00:00
+[2025-04-03T11:12:50.302+0000] {warnings.py:112} WARNING - /home/***/.local/lib/python3.12/site-packages/***/task/task_runner/standard_task_runner.py:70: DeprecationWarning: This process (pid=2341) is multi-threaded, use of fork() may lead to deadlocks in the child.
+  pid = os.fork()
+
+[2025-04-03T11:12:50.305+0000] {standard_task_runner.py:72} INFO - Started process 2343 to run task
+[2025-04-03T11:12:50.308+0000] {standard_task_runner.py:104} INFO - Running: ['***', 'tasks', 'run', 'scrapping_inserting_news', 'delete_rows', 'manual__2025-04-03T11:12:06.693488+00:00', '--job-id', '125', '--raw', '--subdir', 'DAGS_FOLDER/intermediaire_table.py', '--cfg-path', '/tmp/tmptx9vdmq9']
+[2025-04-03T11:12:50.311+0000] {standard_task_runner.py:105} INFO - Job 125: Subtask delete_rows
+[2025-04-03T11:12:50.417+0000] {task_command.py:467} INFO - Running <TaskInstance: scrapping_inserting_news.delete_rows manual__2025-04-03T11:12:06.693488+00:00 [running]> on host d6badcb20287
+[2025-04-03T11:12:50.626+0000] {taskinstance.py:3134} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='scrapping_inserting_news' AIRFLOW_CTX_TASK_ID='delete_rows' AIRFLOW_CTX_EXECUTION_DATE='2025-04-03T11:12:06.693488+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-04-03T11:12:06.693488+00:00'
+[2025-04-03T11:12:50.630+0000] {logging_mixin.py:190} INFO - Task instance is in running state
+[2025-04-03T11:12:50.630+0000] {logging_mixin.py:190} INFO -  Previous state of the Task instance: queued
+[2025-04-03T11:12:50.631+0000] {logging_mixin.py:190} INFO - Current task name:delete_rows state:running start_date:2025-04-03 11:12:50.229999+00:00
+[2025-04-03T11:12:50.631+0000] {logging_mixin.py:190} INFO - Dag name:scrapping_inserting_news and current dag run status:running
+[2025-04-03T11:12:50.632+0000] {taskinstance.py:732} INFO - ::endgroup::
+[2025-04-03T11:12:50.666+0000] {base.py:84} INFO - Retrieving connection 'gcp_conn'
+[2025-04-03T11:12:50.778+0000] {bigquery.py:2958} INFO - Executing: {'query': {'query': "\n        DELETE FROM `nlpfakenews.fake_news_detection.training_data`\n        WHERE id_news IN UNNEST(['1jqflt7', '1jqfkc7', '1jqf7fm', '1jqf4gz', '1jqe6i5', '1jqe52q', '1jqe4eu', '1jqdjsw', '1jqdj5f', '1jqdhq9', '1jqdaa6', '1jqd7f3', '1jqd1wp', '1jqcyyp', '1jqcyan', '1jqcxr8', '1jqcqxt', '1jqc9ax', '1jqbxdb', '1jqbfnd', '1jqbahu', '1jqb6td', '1jqb5c7', '1jqb543', '1jqb42b'])\n    ", 'useLegacySql': False, 'priority': 'BATCH'}}'
+[2025-04-03T11:12:50.780+0000] {bigquery.py:1343} INFO - Inserting job ***_scrapping_inserting_news_delete_rows_2025_04_03T11_12_06_693488_00_00_3c4832ef7c5ded561b6fd4ef4897c379
+[2025-04-03T11:12:53.241+0000] {bigquery.py:2929} INFO - Job ***_scrapping_inserting_news_delete_rows_2025_04_03T11_12_06_693488_00_00_3c4832ef7c5ded561b6fd4ef4897c379 is completed. Checking the job status
+[2025-04-03T11:12:53.273+0000] {taskinstance.py:341} INFO - ::group::Post task execution logs
+[2025-04-03T11:12:53.274+0000] {taskinstance.py:353} INFO - Marking task as SUCCESS. dag_id=scrapping_inserting_news, task_id=delete_rows, run_id=manual__2025-04-03T11:12:06.693488+00:00, execution_date=20250403T111206, start_date=20250403T111250, end_date=20250403T111253
+[2025-04-03T11:12:53.313+0000] {logging_mixin.py:190} INFO - Task instance in success state
+[2025-04-03T11:12:53.313+0000] {logging_mixin.py:190} INFO -  Previous state of the Task instance: running
+[2025-04-03T11:12:53.314+0000] {logging_mixin.py:190} INFO - Dag name:scrapping_inserting_news queued_at:2025-04-03 11:12:06.719958+00:00
+[2025-04-03T11:12:53.314+0000] {logging_mixin.py:190} INFO - Task hostname:d6badcb20287 operator:BigQueryInsertJobOperator
+[2025-04-03T11:12:53.345+0000] {local_task_job_runner.py:266} INFO - Task exited with return code 0
+[2025-04-03T11:12:53.400+0000] {taskinstance.py:3901} INFO - 1 downstream tasks scheduled from follow-on schedule check
+[2025-04-03T11:12:53.402+0000] {local_task_job_runner.py:245} INFO - ::endgroup::
