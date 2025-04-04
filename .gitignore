@@ -3,4 +3,6 @@ draft.ipynb
 .python-version
 *.ipynb
 .env
+*.log
 secrets/
+logs/
