@@ -23094,6 +23094,7 @@ airflow.exceptions.AirflowException: Tried to create relationships between tasks
 [2025-04-03T13:34:54.041+0000] {logging_mixin.py:190} INFO - [2025-04-03T13:34:54.038+0000] {dag.py:3239} INFO - Sync 1 DAGs
 [2025-04-03T13:34:54.069+0000] {logging_mixin.py:190} INFO - [2025-04-03T13:34:54.068+0000] {dag.py:4180} INFO - Setting next_dagrun for scrapping_inserting_news to None, run_after=None
 [2025-04-03T13:34:54.100+0000] {processor.py:208} INFO - Processing /opt/airflow/dags/intermediaire_table.py took 0.451 seconds
+<<<<<<< HEAD
 [2025-04-03T13:35:24.895+0000] {processor.py:186} INFO - Started process (PID=36788) to work on /opt/airflow/dags/intermediaire_table.py
 [2025-04-03T13:35:24.901+0000] {processor.py:914} INFO - Processing file /opt/airflow/dags/intermediaire_table.py for tasks to queue
 [2025-04-03T13:35:24.904+0000] {logging_mixin.py:190} INFO - [2025-04-03T13:35:24.903+0000] {dagbag.py:588} INFO - Filling up the DagBag from /opt/airflow/dags/intermediaire_table.py
@@ -29737,3 +29738,5 @@ airflow.exceptions.AirflowException: Tried to create relationships between tasks
 [2025-04-03T21:43:06.742+0000] {logging_mixin.py:190} INFO - [2025-04-03T21:43:06.741+0000] {dag.py:3239} INFO - Sync 1 DAGs
 [2025-04-03T21:43:06.761+0000] {logging_mixin.py:190} INFO - [2025-04-03T21:43:06.761+0000] {dag.py:4180} INFO - Setting next_dagrun for scrapping_inserting_news to None, run_after=None
 [2025-04-03T21:43:06.785+0000] {processor.py:208} INFO - Processing /opt/airflow/dags/intermediaire_table.py took 0.704 seconds
+=======
+>>>>>>> 1b77429e19a00f6c0ce13f1efcd0df5e175258bb
