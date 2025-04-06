@@ -90,7 +90,6 @@ nest-asyncio==1.6.0
 networkx==3.4.2
 newspaper3k==0.2.8
 nltk==3.9.1
-numpy==1.24.3
 nvidia-cublas-cu12==12.4.5.8
 nvidia-cuda-cupti-cu12==12.4.127
 nvidia-cuda-nvrtc-cu12==12.4.127
@@ -189,4 +188,3 @@ wrapt==1.17.2
 xxhash==3.5.0
 yarl==1.18.3
 zope.interface==7.2
->>>>>>>>> Temporary merge branch 2
