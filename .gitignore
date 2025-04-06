@@ -6,3 +6,4 @@ draft.ipynb
 *.log
 secrets/
 logs/
+secrets.toml
