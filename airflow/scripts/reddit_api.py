@@ -1,6 +1,7 @@
 import requests
 import pandas as pd
 from pprint import pprint
+from datetime import datetime, timezone
 
 #'username': 'UselessJohnDoe',
 #'password': 'UselessUse'
@@ -13,7 +14,9 @@ class Reddit:
         self.secret_key = SECRET_KEY
         self.reddit_passsword = reddit_passsword
         self.reddit_username = reddit_username
-        self.headers = { 'User-Agent': 'MyApp/0.0.1' ,'Authorization': 'bearer eyJhbGciOiJSUzI1NiIsImtpZCI6IlNIQTI1NjpzS3dsMnlsV0VtMjVmcXhwTU40cWY4MXE2OWFFdWFyMnpLMUdhVGxjdWNZIiwidHlwIjoiSldUIn0.eyJzdWIiOiJ1c2VyIiwiZXhwIjoxNzQzNzYwNzE4Ljk4MTk2MiwiaWF0IjoxNzQzNjc0MzE4Ljk4MTk2MiwianRpIjoiLWRrTGYyZ0lJckJQOE5pN0tfVnhzNnNtNnRPLWpnIiwiY2lkIjoibVY3Y1FtSXZGX0hJX2Y0cmRCN3FVUSIsImxpZCI6InQyXzFtZWNxNmI5NHMiLCJhaWQiOiJ0Ml8xbWVjcTZiOTRzIiwibGNhIjoxNzQzNTAxNDI4ODkzLCJzY3AiOiJlSnlLVnRKU2lnVUVBQURfX3dOekFTYyIsImZsbyI6OX0.TiA00Wg-gyVTWOJU8IKSR79MYnKCybSsT58gsdAtJKDmzpGpsC_0BI75HhZJ7wD5yef-ld3oysgFJLm7evs5tow433SoKaQLyPYaSgKQNeapIlkTg7pt2ru9W2Hrl35C59hS3X1fP4zWBMy8HqChj2i13W-rCOsRcGGLXQz9fDzCMljW-HAQFNdvDWjWL0YFZnDb0jKO0g66Ov4mabsEl3J_kB_oglET0kbSBj1hlgre8Zavj4H_-pnu3MhS3MlZagnnJ9MZOZcp1qy3x89R4iSnES63R7wJcFgCTtD76TEVIoP0dyT6PmzOo9iuALIQk4SslHUgM2MhKFaGz5krzg'}
+        self.headers = { 'User-Agent': 'MyApp/0.0.1'}
+
+        #self.headers = { 'User-Agent': 'MyApp/0.0.1' ,'Authorization': 'bearer eyJhbGciOiJSUzI1NiIsImtpZCI6IlNIQTI1NjpzS3dsMnlsV0VtMjVmcXhwTU40cWY4MXE2OWFFdWFyMnpLMUdhVGxjdWNZIiwidHlwIjoiSldUIn0.eyJzdWIiOiJ1c2VyIiwiZXhwIjoxNzQzNzYwNzE4Ljk4MTk2MiwiaWF0IjoxNzQzNjc0MzE4Ljk4MTk2MiwianRpIjoiLWRrTGYyZ0lJckJQOE5pN0tfVnhzNnNtNnRPLWpnIiwiY2lkIjoibVY3Y1FtSXZGX0hJX2Y0cmRCN3FVUSIsImxpZCI6InQyXzFtZWNxNmI5NHMiLCJhaWQiOiJ0Ml8xbWVjcTZiOTRzIiwibGNhIjoxNzQzNTAxNDI4ODkzLCJzY3AiOiJlSnlLVnRKU2lnVUVBQURfX3dOekFTYyIsImZsbyI6OX0.TiA00Wg-gyVTWOJU8IKSR79MYnKCybSsT58gsdAtJKDmzpGpsC_0BI75HhZJ7wD5yef-ld3oysgFJLm7evs5tow433SoKaQLyPYaSgKQNeapIlkTg7pt2ru9W2Hrl35C59hS3X1fP4zWBMy8HqChj2i13W-rCOsRcGGLXQz9fDzCMljW-HAQFNdvDWjWL0YFZnDb0jKO0g66Ov4mabsEl3J_kB_oglET0kbSBj1hlgre8Zavj4H_-pnu3MhS3MlZagnnJ9MZOZcp1qy3x89R4iSnES63R7wJcFgCTtD76TEVIoP0dyT6PmzOo9iuALIQk4SslHUgM2MhKFaGz5krzg'}
 
     def get_token(self):
         data = {
@@ -46,12 +49,15 @@ class Reddit:
         news = self.make_api_call(self.url_listing('news'), 'get')
         all_news = []
         for new in news['data']['children']:
-            all_news.append({'id_news': new['data']['id'], 'title': new['data']['title'], 'url': new['data']['url'], 'author': new['data']['author']})
+            dt_object = datetime.fromtimestamp(new['data']['created'], tz=timezone.utc)
+            # Formatage en chaîne de caractères pour BigQuery
+            formatted_datetime = dt_object.strftime('%Y-%m-%d %H:%M:%S')
+            all_news.append({'id_news': new['data']['id'], 'date_reference': formatted_datetime,'title': new['data']['title'], 'url': new['data']['url'], 'author': new['data']['author']})
         df_news = pd.DataFrame(all_news)
         df_news['source'] = 'Reddit'
         return df_news
 
     def build_reddit(self):
-        #self.get_token()
+        self.get_token()
         df_created = self.create_news_df()
         return df_created
