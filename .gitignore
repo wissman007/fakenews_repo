@@ -7,4 +7,5 @@ draft.ipynb
 secrets/
 logs/
 secrets.toml
-airflow/logs/
+/airflow/logs/
+/airflow/logs/dag_processor_manager/
