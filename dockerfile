@@ -18,7 +18,7 @@ RUN pip install -e ./src
 WORKDIR /app/
 
 # Exposer le port de l'API FastAPI
-EXPOSE 8080
+EXPOSE 5000
 
 # Lancer l'API FastAPI avec uvicorn
-CMD ["uvicorn", "src.api.app:app", "--host", "0.0.0.0", "--port", "8080"]
+CMD ["uvicorn", "src.api.app:app", "--host", "0.0.0.0", "--port", "5000"]
