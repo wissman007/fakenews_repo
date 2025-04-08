@@ -26,19 +26,21 @@ resource "google_compute_instance" "airflow_vm" {
     access_config {} # Assigns a public IP
   }
 
-  metadata_startup_script = <<-EOT
+ 
+
+   metadata_startup_script = <<-EOT
     #!/bin/bash
     sudo apt update -y
     sudo apt install -y docker.io docker-compose
-    sudo apt install -y python3-pip git
-    sudo systemctl start docker
     sudo systemctl enable docker
+    sudo systemctl start docker
 
+    # Authenticate Docker with Artifact Registry
+    gcloud auth configure-docker europe-west1-docker.pkg.dev --quiet
 
-    mkdir -p /opt/airflow/
-    cd /opt/airflow/
+    mkdir -p /opt/airflow
+    cd /opt/airflow
 
-    # Create a Docker Compose file
     cat <<EOF > docker-compose.yaml
     version: '3'
     services:
@@ -49,84 +51,77 @@ resource "google_compute_instance" "airflow_vm" {
           POSTGRES_USER: airflow
           POSTGRES_PASSWORD: airflow
           POSTGRES_DB: airflow
-        healthcheck:
-          test: ["CMD", "pg_isready", "-U", "airflow"]
-          interval: 5s
-          retries: 5
-          start_period: 10s
 
-      git-sync:
-        image: k8s.gcr.io/git-sync:v3.1.6
+      redis:
+        image: redis:alpine
         restart: always
-        user: "0:0" # Run as root
 
-        environment:
-          GIT_SYNC_REPO: "https://abdeljaouad.wissem%40gmail.com:z%26ZD%25W30%q@github.com/HadjMohamed/NLP-FakeNews.git"
-          GIT_SYNC_BRANCH: "dev"
-          GIT_SYNC_WAIT: "30"
-          GIT_SYNC_DEST: "repo"
-          GIT_SYNC_ROOT: "/dags"
-          GIT_SYNC_ONE_TIME: "true" 
-          GIT_SYNC_DEPTH: "1"
-            
-
-        volumes:
-          - /opt/dags/mount:/dags 
-
-      airflow-init:
-        image: apache/airflow:2.6.0-python3.10
-        restart: on-failure
-        depends_on:
-          postgres:
-            condition: service_healthy
-        environment:
-          AIRFLOW__CORE__SQL_ALCHEMY_CONN: postgresql+psycopg2://airflow:airflow@postgres/airflow
-        command: ["airflow", "db", "init"]   
-      
       webserver:
-        image: apache/airflow:2.6.0-python3.10
-        restart: always
-        user: "0:0" # Run as root
+        image: europe-west1-docker.pkg.dev/nlpfakenews/fake-news-repos/airflow-airflow:0.5.0
         depends_on:
           - postgres
-          - airflow-init
-          - git-sync
-        environment:
-          AIRFLOW__CORE__SQL_ALCHEMY_CONN: postgresql+psycopg2://airflow:airflow@postgres/airflow
-          AIRFLOW__WEBSERVER__RBAC: "True"
-          AIRFLOW_WWW_USER_CREATE: "true"
-          AIRFLOW_WWW_USER_USERNAME: "admin"
-          AIRFLOW_WWW_USER_PASSWORD: "admin"
-          AIRFLOW_WWW_USER_FIRSTNAME: "Wissem"
-          AIRFLOW_WWW_USER_LASTNAME: "Abdeljaouad"
-          AIRFLOW_WWW_USER_EMAIL: "wissem@example.com"
-          AIRFLOW_WWW_USER_ROLE: "Admin"
+          - redis
         ports:
           - "8080:8080"
-        volumes:
-          - /opt/dags/mount/repo/airflow/dags:/opt/airflow/dags
-          - /opt/dags/mount/repo/airflow:/opt/airflow/src
-          
+        environment:
+          AIRFLOW__CORE__EXECUTOR: CeleryExecutor
+          AIRFLOW__CORE__SQL_ALCHEMY_CONN: postgresql+psycopg2://airflow:airflow@postgres:5432/airflow
+          AIRFLOW__CELERY__RESULT_BACKEND: db+postgresql://airflow:airflow@postgres:5432/airflow
+          AIRFLOW__CELERY__BROKER_URL: redis://redis:6379/0
+          AIRFLOW__CORE__LOGGING_LEVEL: INFO
+          AIRFLOW__LOGGING__LOGGING_LEVEL: INFO
+          AIRFLOW__LOGGING__BASE_LOG_FOLDER: /opt/airflow/logs
+          AIRFLOW__LOGGING__REMOTE_LOGGING: "False"
 
-        command: >
-            bash -c " airflow users create --username admin --firstname Wissem --lastname Abdeljaouad --role Admin --email abdeljaouad.wissem@gmail.com --password admin 
-            && su - airflow -c 'pip install --user -r /opt/airflow/src/requirements_docker.txt' 
-            && airflow webserver"
+          AIRFLOW_UID: 1001
+          DATASET_NAME: fake_news_detection_terraform
+          TABLE_NAME: training_data_v2
+          CLIENT_ID: mV7cQmIvF_HI_f4rdB7qUQ
+          SECRET_KEY: mc8t6uX8xsdp_F67vzUdV1mzb8ElCA
+          MY_PROJECT: nlpfakenews
+          AIRFLOW__WEBSERVER__WORKERS: 4
+
+        
+        command: webserver
+       
 
       scheduler:
-        image: apache/airflow:2.6.0-python3.10
-        restart: always
+        image: europe-west1-docker.pkg.dev/nlpfakenews/fake-news-repos/airflow-airflow:0.5.0
         depends_on:
           - webserver
         environment:
-          AIRFLOW__CORE__SQL_ALCHEMY_CONN: postgresql+psycopg2://airflow:airflow@postgres/airflow
-        command: ["scheduler"]
-        volumes:
-          - /opt/dags/mount/repo/airflow/dags:/opt/airflow/dags
+          AIRFLOW__CORE__SQL_ALCHEMY_CONN: postgresql+psycopg2://airflow:airflow@postgres:5432/airflow
+          AIRFLOW__CELERY__BROKER_URL: redis://redis:6379/0
+          AIRFLOW__CELERY__RESULT_BACKEND: db+postgresql://airflow:airflow@postgres:5432/airflow
+          AIRFLOW__CORE__LOGGING_LEVEL: INFO
+          AIRFLOW__LOGGING__LOGGING_LEVEL: INFO
+          AIRFLOW__LOGGING__BASE_LOG_FOLDER: /opt/airflow/logs
+          AIRFLOW__LOGGING__REMOTE_LOGGING: "False"
+
+          AIRFLOW_UID: 1001
+          DATASET_NAME: fake_news_detection_terraform
+          TABLE_NAME: training_data_v2
+          CLIENT_ID: mV7cQmIvF_HI_f4rdB7qUQ
+          SECRET_KEY: mc8t6uX8xsdp_F67vzUdV1mzb8ElCA
+          MY_PROJECT: nlpfakenews
+
+        command: scheduler
+      
 
     EOF
 
-    # Start Airflow
     sudo docker-compose up -d
   EOT
+
+  metadata = {
+    "google-compute-default-credentials" = "true"
+  }
+
+  service_account {
+    email  = "fakenews-gcr@nlpfakenews.iam.gserviceaccount.com"
+    scopes = ["https://www.googleapis.com/auth/cloud-platform"]
+  }
+  labels = {
+    env = "dev"
+  }
 }

@@ -8,7 +8,7 @@ from airflow.operators.python import PythonOperator
 from airflow.providers.google.cloud.hooks.bigquery import BigQueryHook
 from pprint import pprint
 from airflow.decorators import task
-from airflow.providers.google.cloud.operators.bigquery import BigQueryCreateTableOperator, BigQueryInsertJobOperator, BigQueryCreateEmptyDatasetOperator, BigQueryUpsertTableOperator
+from airflow.providers.google.cloud.operators.bigquery import  BigQueryInsertJobOperator, BigQueryCreateEmptyDatasetOperator, BigQueryUpsertTableOperator
 sys.path.append("/opt/airflow")
 from scripts.main import main
 
@@ -58,24 +58,25 @@ with DAG(
             "tableReference": {"tableId": "test_table_id"},
         },
     )
-    create_table = BigQueryCreateTableOperator(
-        gcp_conn_id= "gcp_conn",
+    create_table = BigQueryInsertJobOperator(
+        gcp_conn_id="gcp_conn",
         task_id="create_table_intermediaire",
-        dataset_id=DATASET_NAME,
-        table_id=TABLE_NAME,
-        table_resource={
-            "schema": {
-                "fields": [
-                    {"name": "id_news", "type": "STRING", "mode": "REQUIRED"},
-                    {"name": "title", "type": "STRING", "mode": "NULLABLE"},
-                    {"name": "url", "type": "STRING", "mode": "REQUIRED"},
-                    {"name": "author", "type": "STRING", "mode": "REQUIRED"},
-                    {"name": "source", "type": "STRING", "mode": "REQUIRED"},
-                    {"name": "official_title", "type": "STRING", "mode": "REQUIRED"},
-                    {"name": "real_content", "type": "STRING", "mode": "REQUIRED"},
-                    {"name": "scrapping_status", "type": "BOOL", "mode": "REQUIRED"},
-                ],
-            },
+        configuration={
+            "query": {
+                "query": f"""
+                CREATE TABLE IF NOT EXISTS `{PROJECT_NAME}.{DATASET_NAME}.{TABLE_NAME}` (
+                    id_news STRING NOT NULL,
+                    title STRING,
+                    url STRING NOT NULL,
+                    author STRING NOT NULL,
+                    source STRING NOT NULL,
+                    official_title STRING NOT NULL,
+                    real_content STRING NOT NULL,
+                    scrapping_status BOOL NOT NULL
+                )
+                """,
+                "useLegacySql": False,
+            }
         },
     )
     create_query_delete_rows = PythonOperator(

@@ -1,0 +1,47 @@
+# airflow-deployment.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: airflow-config
+data:
+  AIRFLOW__CORE__EXECUTOR: CeleryExecutor
+  AIRFLOW__CORE__SQL_ALCHEMY_CONN: postgresql+psycopg2://airflow:airflow@postgres:5432/airflow
+  AIRFLOW__CELERY__RESULT_BACKEND: db+postgresql://airflow:airflow@postgres:5432/airflow
+  AIRFLOW__CELERY__BROKER_URL: redis://:@airflow-redis:6379/0
+
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: airflow-webserver
+spec:
+  serviceName: "airflow-webserver"
+  replicas: 1
+  selector:
+    matchLabels:
+      app: airflow-webserver
+  template:
+    metadata:
+      labels:
+        app: airflow-webserver
+    spec:
+      containers:
+      - name: webserver
+        image: europe-west1-docker.pkg.dev/nlpfakenews/fake-news-repos/airflow-airflow:latest
+        args: ["webserver"]
+        ports:
+        - containerPort: 8080
+        envFrom:
+        - configMapRef:
+            name: airflow-config
+        volumeMounts:
+        - name: dags-volume
+          mountPath: /opt/airflow/dags
+  volumeClaimTemplates:
+  - metadata:
+      name: dags-volume
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: 10Gi
