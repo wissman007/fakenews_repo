@@ -1,0 +1,6 @@
+numpy==1.23
+tensorflow==2.10
+transformers
+fastapi
+uvicorn
+pydantic
