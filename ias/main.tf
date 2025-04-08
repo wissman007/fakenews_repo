@@ -57,7 +57,7 @@ resource "google_compute_instance" "airflow_vm" {
         restart: always
 
       webserver:
-        image: europe-west1-docker.pkg.dev/nlpfakenews/fake-news-repos/airflow-airflow:0.5.0
+        image: europe-west1-docker.pkg.dev/nlpfakenews/fake-news-repos/airflow-airflow:latest
         depends_on:
           - postgres
           - redis
@@ -86,7 +86,7 @@ resource "google_compute_instance" "airflow_vm" {
        
 
       scheduler:
-        image: europe-west1-docker.pkg.dev/nlpfakenews/fake-news-repos/airflow-airflow:0.5.0
+        image: europe-west1-docker.pkg.dev/nlpfakenews/fake-news-repos/airflow-airflow:latest
         depends_on:
           - webserver
         environment:
@@ -107,6 +107,17 @@ resource "google_compute_instance" "airflow_vm" {
 
         command: scheduler
       
+      api-service:
+        image: europe-west1-docker.pkg.dev/nlpfakenews/fake-news-repos/api:0.5.0
+        restart: always
+        ports:
+          - "5000:5000"
+        healthcheck:
+          test: ["CMD", "curl", "-f", "http://localhost:5000/health"]
+          interval: 30s
+          timeout: 10s
+          retries: 5
+
 
     EOF
 

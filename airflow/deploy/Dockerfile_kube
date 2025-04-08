@@ -24,7 +24,3 @@ RUN chmod +x /entrypoint.sh
 USER airflow
 ENTRYPOINT ["/entrypoint.sh"]
 
-
-
-# Initialize the Airflow database before starting the webserver
-#CMD ["bash", "-c", "airflow db init && airflow webserver --port 8080"]
