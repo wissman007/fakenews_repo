@@ -49,7 +49,7 @@ def mapping_score(score):
     return value
 
 with DAG(
-    dag_id="api_to_model",
+    dag_id="test_dag",
     start_date=datetime.datetime(2021, 1, 1),
     schedule=None,
 ) as dag:
