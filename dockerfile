@@ -1,18 +1,24 @@
-# Utiliser l'image officielle Python
-FROM python:3.9
+FROM python:3.10-slim
 
-# Définir le répertoire de travail dans le conteneur
 WORKDIR /app
 
-# Copier les fichiers nécessaires
-COPY api/app.py requirements.txt /app/
-COPY dataprediction /app/dataprediction/
+# Copier le fichier requirements.txt depuis src
+COPY src/requirements.txt ./src/requirements.txt
 
 # Installer les dépendances
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install --upgrade pip && pip install -r /app/src/requirements.txt
 
-# Exposer le port 8000 pour FastAPI
-EXPOSE 8000
+# Copier tout le code source dans le container
+COPY src/ ./src
 
-# Lancer l'API avec Uvicorn
-CMD ["uvicorn", "api/app:app", "--host", "0.0.0.0", "--port", "8000"]
+# Installer dataprediction en mode "editable"
+RUN pip install -e ./src
+
+# Définir le répertoire de travail dans /app/
+WORKDIR /app/
+
+# Exposer le port de l'API FastAPI
+EXPOSE 8080
+
+# Lancer l'API FastAPI avec uvicorn
+CMD ["uvicorn", "src.api.app:app", "--host", "0.0.0.0", "--port", "8080"]
