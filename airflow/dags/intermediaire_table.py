@@ -27,7 +27,6 @@ def create_bq_delete_query(ti):
         WHERE id_news IN UNNEST({resultat2})
     """
     return query
-
 def insert_data_query(ti):
     df, result2 = ti.xcom_pull(task_ids='call_external_function')
     # Convertir le DataFrame en une liste de dictionnaires (format adapté pour la requête SQL)
@@ -50,14 +49,6 @@ with DAG(
     start_date=datetime.datetime(2021, 1, 1),
     schedule=None,
 ):
-    upsert_table = BigQueryUpsertTableOperator(
-        gcp_conn_id= "gcp_conn",
-        task_id="upsert_table",
-        dataset_id=os.getenv("DATASET_NAME"),
-        table_resource={
-            "tableReference": {"tableId": "test_table_id"},
-        },
-    )
     create_table = BigQueryCreateTableOperator(
         gcp_conn_id= "gcp_conn",
         task_id="create_table_intermediaire",
@@ -67,6 +58,7 @@ with DAG(
             "schema": {
                 "fields": [
                     {"name": "id_news", "type": "STRING", "mode": "REQUIRED"},
+                    {"name": "date_reference", "type": "DATETIME", "mode": "REQUIRED"},
                     {"name": "title", "type": "STRING", "mode": "NULLABLE"},
                     {"name": "url", "type": "STRING", "mode": "REQUIRED"},
                     {"name": "author", "type": "STRING", "mode": "REQUIRED"},
