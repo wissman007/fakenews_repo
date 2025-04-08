@@ -148,7 +148,7 @@ def insert_data_into_bigquery(query):
     return insert_job
 
 with DAG(
-    dag_id="test_dag",
+    dag_id="model_to_bq",
     start_date=datetime.datetime(2021, 1, 1),
     schedule=None,
 ) as dag:
@@ -179,11 +179,11 @@ with DAG(
         
     max_date = extract_last_timestamp()
     my_data = extract_bq_data(max_date)
-    final_data = data_model(my_data)
-    query = generate_insert_query(final_data)
+    fin_data = data_model(my_data)
+    query = generate_insert_query(fin_data)
     insert_task = insert_data_into_bigquery(query)
 
 
-    create_dataset >> create_table >> max_date >> my_data >> final_data >> query >> insert_task 
+    create_dataset >> create_table >> max_date >> my_data >> fin_data >> query >> insert_task 
 
     
