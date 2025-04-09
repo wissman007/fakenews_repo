@@ -66,14 +66,14 @@ if [[ "$1" == "webserver" || "$1" == "scheduler" ]]; then
   # Create admin user if it doesn't exist
   if [[ -n "$AIRFLOW_ADMIN_USER" && -n "$AIRFLOW_ADMIN_PASSWORD" ]]; then
     echo "Checking if Airflow admin user exists..."
-    airflow users list | grep -q "$AIRFLOW_ADMIN_USER" || \
-      airflow users create \
-        --username "$AIRFLOW_ADMIN_USER" \
-        --password "$AIRFLOW_ADMIN_PASSWORD" \
-        --firstname Admin \
-        --lastname User \
-        --role Admin \
-        --email admin@example.com
+   # airflow users list | grep -q "$AIRFLOW_ADMIN_USER" || \
+   #   airflow users create \
+   #     --username "$AIRFLOW_ADMIN_USER" \
+   #     --password "$AIRFLOW_ADMIN_PASSWORD" \
+   #     --firstname Admin \
+   #     --lastname User \
+   #     --role Admin \
+   #     --email admin@example.com
   fi
 fi
 
