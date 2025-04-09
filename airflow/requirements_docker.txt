@@ -8,3 +8,4 @@ lxml-html-clean
 numpy
 pandas
 wordcloud
+airflow.providers.google.cloud.hooks.bigquery

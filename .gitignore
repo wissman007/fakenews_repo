@@ -7,4 +7,9 @@ draft.ipynb
 secrets/
 logs/
 secrets.toml
+<<<<<<< HEAD
 .streamlit
+=======
+/airflow/logs/
+/airflow/logs/dag_processor_manager/
+>>>>>>> a131b52de9aeda5d0623fe7bee3750aeed06e9bf
