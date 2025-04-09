@@ -1,0 +1,10 @@
+steps:
+  - name: 'hashicorp/terraform:1.5.0'
+    entrypoint: 'sh'
+    args:
+      - '-c'
+      - |
+        terraform init
+        terraform plan -out=tfplan
+        terraform apply -auto-approve tfplan
+timeout: 1200s

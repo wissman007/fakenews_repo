@@ -57,7 +57,7 @@ resource "google_compute_instance" "airflow_vm" {
         restart: always
 
       webserver:
-        image: europe-west1-docker.pkg.dev/nlpfakenews/fake-news-repos/airflow-airflow:latest
+        image: europe-west1-docker.pkg.dev/nlpfakenews/fake-news-repos/airflow-airflow:1.0.2
         depends_on:
           - postgres
           - redis
@@ -65,6 +65,10 @@ resource "google_compute_instance" "airflow_vm" {
           - "8080:8080"
         environment:
           AIRFLOW__CORE__EXECUTOR: CeleryExecutor
+          AIRFLOW__CORE__DAGS_ARE_PAUSED_AT_CREATION: 'true'
+          AIRFLOW__CORE__LOAD_EXAMPLES: 'true'
+          AIRFLOW__SCHEDULER__ENABLE_HEALTH_CHECK: 'true'
+
           AIRFLOW__CORE__SQL_ALCHEMY_CONN: postgresql+psycopg2://airflow:airflow@postgres:5432/airflow
           AIRFLOW__CELERY__RESULT_BACKEND: db+postgresql://airflow:airflow@postgres:5432/airflow
           AIRFLOW__CELERY__BROKER_URL: redis://redis:6379/0
@@ -72,7 +76,7 @@ resource "google_compute_instance" "airflow_vm" {
           AIRFLOW__LOGGING__LOGGING_LEVEL: INFO
           AIRFLOW__LOGGING__BASE_LOG_FOLDER: /opt/airflow/logs
           AIRFLOW__LOGGING__REMOTE_LOGGING: "False"
-
+          
           AIRFLOW_UID: 1001
           DATASET_NAME: fake_news_detection_terraform
           TABLE_NAME: training_data_v2
@@ -86,10 +90,16 @@ resource "google_compute_instance" "airflow_vm" {
        
 
       scheduler:
-        image: europe-west1-docker.pkg.dev/nlpfakenews/fake-news-repos/airflow-airflow:latest
+        image: europe-west1-docker.pkg.dev/nlpfakenews/fake-news-repos/airflow-airflow:1.0.2
         depends_on:
           - webserver
         environment:
+          
+          AIRFLOW__CORE__EXECUTOR: CeleryExecutor
+          AIRFLOW__CORE__DAGS_ARE_PAUSED_AT_CREATION: 'true'
+          AIRFLOW__CORE__LOAD_EXAMPLES: 'true'
+          AIRFLOW__SCHEDULER__ENABLE_HEALTH_CHECK: 'true'
+
           AIRFLOW__CORE__SQL_ALCHEMY_CONN: postgresql+psycopg2://airflow:airflow@postgres:5432/airflow
           AIRFLOW__CELERY__BROKER_URL: redis://redis:6379/0
           AIRFLOW__CELERY__RESULT_BACKEND: db+postgresql://airflow:airflow@postgres:5432/airflow
@@ -117,6 +127,33 @@ resource "google_compute_instance" "airflow_vm" {
           interval: 30s
           timeout: 10s
           retries: 5
+
+      worker-service:
+        image: europe-west1-docker.pkg.dev/nlpfakenews/fake-news-repos/airflow-airflow:1.0.2
+        depends_on:
+          - redis
+          - postgres
+        environment:
+          AIRFLOW__CORE__EXECUTOR: CeleryExecutor
+          AIRFLOW__CORE__DAGS_ARE_PAUSED_AT_CREATION: 'true'
+          AIRFLOW__CORE__LOAD_EXAMPLES: 'true'
+
+          AIRFLOW__CORE__SQL_ALCHEMY_CONN: postgresql+psycopg2://airflow:airflow@postgres:5432/airflow
+          AIRFLOW__CELERY__RESULT_BACKEND: db+postgresql://airflow:airflow@postgres:5432/airflow
+          AIRFLOW__CELERY__BROKER_URL: redis://redis:6379/0
+          AIRFLOW__CORE__LOGGING_LEVEL: INFO
+          AIRFLOW__LOGGING__LOGGING_LEVEL: INFO
+          AIRFLOW__LOGGING__BASE_LOG_FOLDER: /opt/airflow/logs
+          AIRFLOW__LOGGING__REMOTE_LOGGING: "False"
+
+          AIRFLOW_UID: 1001
+          DATASET_NAME: fake_news_detection_terraform
+          TABLE_NAME: training_data_v2
+          CLIENT_ID: mV7cQmIvF_HI_f4rdB7qUQ
+          SECRET_KEY: mc8t6uX8xsdp_F67vzUdV1mzb8ElCA
+          MY_PROJECT: nlpfakenews
+        
+        command: bash -c "export AIRFLOW__CELERY__BROKER_URL=redis://redis:6379/0 && airflow celery worker"
 
 
     EOF
