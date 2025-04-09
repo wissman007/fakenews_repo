@@ -7,3 +7,4 @@ draft.ipynb
 secrets/
 logs/
 secrets.toml
+.streamlit
