@@ -6,8 +6,6 @@ resource "google_storage_bucket" "fake_news_model_storage" {
 
 }
 
-
-
 resource "google_compute_instance" "airflow_vm" {
   name         = "airflow-instance"
   machine_type = "e2-medium"
@@ -133,6 +131,7 @@ resource "google_compute_instance" "airflow_vm" {
         depends_on:
           - redis
           - postgres
+          - webserver
         environment:
           AIRFLOW__CORE__EXECUTOR: CeleryExecutor
           AIRFLOW__CORE__DAGS_ARE_PAUSED_AT_CREATION: 'true'
