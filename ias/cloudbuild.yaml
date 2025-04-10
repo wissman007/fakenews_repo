@@ -1,3 +1,5 @@
+
+logsBucket: "gs://fake_news_training_dataset"
 steps:
   - name: 'hashicorp/terraform:1.5.0'
     entrypoint: 'sh'
