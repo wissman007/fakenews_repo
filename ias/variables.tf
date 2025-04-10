@@ -7,7 +7,7 @@ variable "backend" {
 variable "project_id" {
   description = "GCP project ID"
   type        = string
-  #default     = ""
+default     = "nlpfakenews"
 }
 variable "credentials_file" {
   description = "Path to the GCP credentials file"
