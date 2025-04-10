@@ -8,4 +8,5 @@ steps:
         terraform init
         terraform plan -out=tfplan
         terraform apply -auto-approve tfplan
+    dir: 'ias'
 timeout: 1200s
