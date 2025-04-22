@@ -1,8 +1,10 @@
 draftscrap.ipynb
 draft.ipynb
+draft.ipynb
 .python-version
 *.ipynb
 .env
+*.log
 *.log
 secrets/
 logs/
