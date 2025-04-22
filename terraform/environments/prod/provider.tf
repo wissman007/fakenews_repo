@@ -17,5 +17,5 @@ terraform {
 provider "google" {
   project     = "nlpfakenews"
   region      = var.region
-  credentials = file(var.credentials_file)
+#  credentials = file(var.credentials_file)
 }

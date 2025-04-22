@@ -12,7 +12,7 @@ resource "google_compute_instance" "airflow_vm" {
   name         = "airflow-instance"
   machine_type = "e2-medium"
   zone         = "europe-west1-b"
-  project      = var.project_id
+  project      = "nlpfakenews"
   tags         = ["airflow"]
 
   boot_disk {

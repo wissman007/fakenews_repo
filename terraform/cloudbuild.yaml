@@ -1,4 +1,3 @@
-
 logsBucket: "gs://fake_news_training_dataset"
 steps:
   - name: 'hashicorp/terraform:1.5.0'
@@ -9,4 +8,5 @@ steps:
         terraform init
         terraform plan -out=tfplan
         terraform apply -auto-approve tfplan
+    dir: 'ias'
 timeout: 1200s
