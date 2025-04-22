@@ -1,7 +1,6 @@
 # Terraform variables for the development environment on GCP
 
-# GCP region
-gcp_region = "eu-west1"
+
 
 # Environment name
 environment = "dev"
@@ -13,24 +12,27 @@ credentials_file = "secrets/nlpfakenews-bd7d40d4f54f.json"
 
 # Backend configuration
 backend = "gcs" # Options: local, gcs
-bucket_nlpfakenews_terraform_state = "nlpfakenews_terraform_state-${environment}"
+bucket-nlpfakenews-terraform-state = "bucket-nlpfakenews-terraform-state-dev"
 prefix = "terraform/state"
-region = gcp_region
+region = "europe-west1"
+
 
 #path = "${path.module}/terraform.tfstate"
 
 # Airflow VM configuration
-airflow_vm_name = "airflow-instance"
+airflow_instance_name = "airflow-instance-dev"
+airflow_vm_image = "europe-west1-docker.pkg.dev/nlpfakenews/fake-news-repos/airflow-airflow:1.0.2"
 airflow_vm_machine_type = "e2-medium"
-airflow_vm_zone = "europe-west1-b"
 airflow_vm_tags = ["airflow"]
 airflow_vm_boot_disk_image = "ubuntu-os-cloud/ubuntu-2204-lts"
-airflow_vm_network = "default"
-airflow_git_sync_image = "k8s.gcr.io/git-sync:v3.1.6"
-airflow_git_repo = "https://github.com/HadjMohamed/NLP-FakeNews.git"
+airflow_vm_network_interface = "default"
 
 # S3 bucket configuration model storage
-gcs_bucket_model_storage_name = "fake_news_model_storage-${environment}"
+bucket-nlp-fakenews-model-storage = "bucket-nlp-fakenews-model-storage-dev"
+
+# datasert configuration
+bigquery_fakenews_dataset_id = "fakenews_dataset_dev"
+bigquery_fakenews_user_email = "wissem.abdeljaouad@adventium.Fr"
 
 # Tags
 tags = {

@@ -1,0 +1,69 @@
+services:
+      postgres:
+        image: postgres:13
+        restart: always
+        environment:
+          POSTGRES_USER: airflow
+          POSTGRES_PASSWORD: airflow
+          POSTGRES_DB: airflow
+        healthcheck:
+          test: ["CMD", "pg_isready", "-U", "airflow"]
+          interval: 5s
+          retries: 5
+          start_period: 10s
+        ports:
+          - "5432:5432"
+  
+    
+      redis:  
+        image: redis:6
+        restart: always
+        healthcheck:
+          test: ["CMD", "redis-cli", "ping"]
+          interval: 5s
+          retries: 5
+          start_period: 10s
+        ports:
+          - "6379:6379"
+  
+      airflow:
+        build:
+          context: .
+          dockerfile: Dockerfile_kube
+       
+      
+      airflow-webserver:
+        image: airflow-airflow:latest    
+        restart: always
+        ports:
+          - "8080:8080"
+        depends_on:
+          postgres:
+            condition: service_healthy
+          redis:
+            condition: service_healthy
+        environment:
+          AIRFLOW__CORE__EXECUTOR: CeleryExecutor
+          AIRFLOW__CORE__SQL_ALCHEMY_CONN: postgresql+psycopg2://airflow:airflow@postgres:5432/airflow
+          AIRFLOW__CELERY__BROKER_URL: redis://redis:6379/0
+          AIRFLOW__CELERY__RESULT_BACKEND: db+postgresql://airflow:airflow@postgres:5432/airflow
+        command: webserver
+
+      airflow-scheduler:
+        image: airflow-airflow:latest    
+        restart: always
+        depends_on:
+          postgres:
+            condition: service_healthy
+          redis:
+            condition: service_healthy
+          airflow-webserver:
+            condition: service_healthy
+        environment:  
+          AIRFLOW__CORE__EXECUTOR: CeleryExecutor
+          AIRFLOW__CORE__SQL_ALCHEMY_CONN: postgresql+psycopg2://airflow:airflow@postgres:5432/airflow
+          AIRFLOW__CELERY__BROKER_URL: redis://redis:6379/0
+          AIRFLOW__CELERY__RESULT_BACKEND: db+postgresql://airflow:airflow@postgres:5432/airflow
+        command: scheduler
+ 
+     
