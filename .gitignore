@@ -9,6 +9,6 @@ draft.ipynb
 secrets/
 logs/
 secrets.toml
-/airflow/logs/
-/airflow/logs/dag_processor_manager/
+airflow/logs/
+airflow/logs/dag_processor_manager/
 .terraform/
