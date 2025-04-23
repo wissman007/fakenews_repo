@@ -1,0 +1,14 @@
+draftscrap.ipynb
+draft.ipynb
+draft.ipynb
+.python-version
+*.ipynb
+.env
+*.log
+*.log
+secrets/
+logs/
+secrets.toml
+airflow/logs/
+airflow/logs/dag_processor_manager/
+.terraform/
